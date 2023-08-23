@@ -45,7 +45,6 @@
 	"type": "module",
 	"dependencies": {
 		"@lucia-auth/adapter-postgresql": "^1.0.1",
-		"@sentry/node": "^7.54.0",
 		"@sentry/svelte": "^7.54.0",
 		"drizzle-orm": "^0.26.3",
 		"drizzle-zod": "^0.4.3",
