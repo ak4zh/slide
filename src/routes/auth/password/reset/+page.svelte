@@ -2,7 +2,6 @@
 	import { ConicGradient } from '@skeletonlabs/skeleton';
 	import type { ConicStop } from '@skeletonlabs/skeleton';
 	import { superForm } from 'sveltekit-superforms/client';
-	//import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 	import { userSchema } from '$lib/config/zod-schemas';
 	import { AlertTriangle } from 'lucide-svelte';
 	import { i } from '@inlang/sdk-js';

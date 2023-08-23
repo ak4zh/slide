@@ -1,12 +1,15 @@
 import nodemailer from 'nodemailer';
-import {
-	FROM_EMAIL,
-	SMTP_HOST,
-	SMTP_PORT,
-	SMTP_SECURE,
-	SMTP_USER,
-	SMTP_PASS
-} from '$env/static/private';
+import { env } from '$env/dynamic/private';
+
+const transporter = nodemailer.createTransport({
+	host: env.SMTP_HOST,
+	port: Number(env.SMTP_PORT),
+	secure: Number(env.SMTP_SECURE) === 1,
+	auth: {
+		user: env.SMTP_USER,
+		pass: env.SMTP_PASS
+	}
+});
 
 export default async function sendEmail(
 	email: string,
@@ -14,65 +17,41 @@ export default async function sendEmail(
 	bodyHtml?: string,
 	bodyText?: string
 ) {
-	if (SMTP_HOST && SMTP_PORT && SMTP_USER && SMTP_PASS && FROM_EMAIL) {
+	if (
+		env.SMTP_HOST &&
+		env.SMTP_PORT &&
+		env.SMTP_USER &&
+		env.SMTP_PASS &&
+		env.FROM_EMAIL
+	) {
 		// create Nodemailer SMTP transporter
-		const transporter = nodemailer.createTransport({
-			// @ts-ignore
-			host: SMTP_HOST,
-			port: Number(SMTP_PORT),
-			secure: Number(SMTP_SECURE) === 1,
-			auth: {
-				user: SMTP_USER,
-				pass: SMTP_PASS
-			}
-		});
-
+		let info;
 		try {
 			if (!bodyText) {
-				transporter.sendMail(
-					{
-						from: FROM_EMAIL,
-						to: email,
-						subject: subject,
-						html: bodyHtml
-					},
-					(err, info) => {
-						if (err) {
-							throw new Error(`Error sending email: ${JSON.stringify(err)}`);
-						}
-					}
-				);
+				info = await transporter.sendMail({
+					from: env.FROM_EMAIL,
+					to: email,
+					subject: subject,
+					html: bodyHtml
+				});
 			} else if (!bodyHtml) {
-				transporter.sendMail(
-					{
-						from: FROM_EMAIL,
-						to: email,
-						subject: subject,
-						text: bodyText
-					},
-					(err, info) => {
-						if (err) {
-							throw new Error(`Error sending email: ${JSON.stringify(err)}`);
-						}
-					}
-				);
+				info = await transporter.sendMail({
+					from: env.FROM_EMAIL,
+					to: email,
+					subject: subject,
+					text: bodyText
+				});
 			} else {
-				transporter.sendMail(
-					{
-						from: FROM_EMAIL,
-						to: email,
-						subject: subject,
-						html: bodyHtml,
-						text: bodyText
-					},
-					(err, info) => {
-						if (err) {
-							throw new Error(`Error sending email: ${JSON.stringify(err)}`);
-						}
-					}
-				);
+				info = await transporter.sendMail({
+					from: env.FROM_EMAIL,
+					to: email,
+					subject: subject,
+					html: bodyHtml,
+					text: bodyText
+				});
 			}
 			console.log('E-mail sent successfully!');
+			console.log(info);
 			return {
 				statusCode: 200,
 				message: 'E-mail sent successfully.'
@@ -81,6 +60,6 @@ export default async function sendEmail(
 			throw new Error(`Error sending email: ${JSON.stringify(error)}`);
 		}
 	} else {
-		console.log(`Email in Log:\nSubject: ${subject}\nBody: ${bodyText}`)
+		console.log(`Email in Log:\nSubject: ${subject}\nBody: ${bodyText}`);
 	}
 }

@@ -15,7 +15,8 @@ const profileSchema = userSchema.pick({
 
 export const load = async (event) => {
 	const form = await superValidate(event, profileSchema);
-	const { user } = await event.locals.auth.validateUser();
+	const session = await event.locals.auth.validate();
+	const user = session?.user;
 	form.data = {
 		firstName: user.firstName,
 		lastName: user.lastName,
@@ -40,8 +41,8 @@ export const actions = {
 		//add user to db
 		try {
 			console.log('updating profile');
-			const { user } = await event.locals.auth.validateUser();
-
+			const session = await event.locals.auth.validate();
+			const user = session?.user;
 			auth.updateUserAttributes(user.userId, {
 				first_name: form.data.firstName,
 				last_name: form.data.lastName,

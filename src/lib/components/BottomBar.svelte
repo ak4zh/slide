@@ -3,7 +3,20 @@
 	import { page } from '$app/stores';
 	import type { NavItems } from '$lib/config/constants';
     import { i } from '@inlang/sdk-js';
+    import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton"
+	import SignoutForm from './SignoutForm.svelte';
+
     export let navItems: NavItems;
+    let formEl: HTMLFormElement;
+
+    const signoutConfirmModal = (button: HTMLButtonElement, form: HTMLFormElement): ModalSettings => {
+        return {
+            type: 'confirm',
+            title: 'Please Confirm',
+            body: 'Are you sure you want to sign out?',
+            response: (r: boolean) => { if (r) form.requestSubmit(button) }
+        }
+    }
 </script>
 
 <div class="card h-16 md:hidden">
@@ -11,15 +24,7 @@
         {#each navItems||[] as nav}
             {#if nav.title === 'signout'}
                 {#if $page.data.user}
-                    <form
-                            use:enhance
-                            action="/auth/sign-out"
-                            method="post"
-                        >
-                            <button type="submit" class="btn"
-                                ><span><svelte:component this={nav.icon}/></span><span>{i(nav.title)}</span></button
-                            >
-                    </form>
+                    <SignoutForm />
                 {/if}
             {:else if (nav.alwaysVisible || ($page.data.user && nav.protected) || (!$page.data.user && !nav.protected))}
                 <a class="btn variant-glass inline-flex flex-col items-center justify-center card {$page.url.pathname === nav.url ? 'bg-primary-active-token' : ''}" href="{nav.url}">

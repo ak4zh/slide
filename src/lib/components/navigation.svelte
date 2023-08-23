@@ -8,6 +8,7 @@
 	
 	import { page } from '$app/stores';
 	import type { NavItems } from '$lib/config/constants';
+	import SignoutForm from './SignoutForm.svelte';
     export let navItems: NavItems;
 	let selectedLanguage: string = language || 'en';
 </script>
@@ -35,17 +36,7 @@
 			{#if nav.title === 'signout'}
 				{#if $page.data.user}
 					<li>
-						<form
-								use:enhance
-								action="/auth/sign-out"
-								method="post"
-								on:click={drawerClose}
-								on:keydown={drawerClose}
-							>
-								<button type="submit" class="btn"
-									><span><svelte:component this={nav.icon}/></span><span>{i(nav.title)}</span></button
-								>
-						</form>
+						<SignoutForm />
 					</li>
 				{/if}
 			{:else if (nav.alwaysVisible || ($page.data.user && nav.protected) || (!$page.data.user && !nav.protected))}

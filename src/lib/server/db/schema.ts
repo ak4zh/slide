@@ -1,48 +1,66 @@
-import { pgTable, bigint, varchar, boolean, uuid, text, timestamp, index } from "drizzle-orm/pg-core";
-import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+import { pgTable, bigint, varchar, boolean, uuid, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
 
-export const users = pgTable("auth_user", {
-	id: uuid("id").primaryKey(),
-    email: text("email").notNull(),
-    firstName: text("first_name"),
-    lastName: text("last_name"),
-    role: text('role', { enum: ['admin', 'user'] }).notNull().default('user'),
-    verified: boolean('verified').notNull().default(false),
-    receiveEmail: boolean('receive_email').notNull().default(true),
-    token: text('token'),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at').defaultNow().notNull()
-}, (users) => ({
-    emailIdx: index('name_idx').on(users.email),
-    tokenIdx: index('token_idx').on(users.token)
-}));
+export const users = pgTable(
+	'auth_user',
+	{
+		id: uuid('id').primaryKey().defaultRandom(),
+		role: text('role', { enum: ['admin', 'user'] })
+			.notNull()
+			.default('user'),
+		createdAt: timestamp('created_at').defaultNow().notNull(),
+		firstName: text('first_name'),
+		lastName: text('last_name'),
+		domain: text('domain').notNull(),
+		email: text('email').notNull(),
+		emailVerified: boolean('email_verified').default(false).notNull()
+	},
+	(users) => ({
+		emailDomainIdx: uniqueIndex('email_domain_idx').on(users.email, users.domain)
+	})
+);
 
-const insertUserSchema = createInsertSchema(users);
-const selectUserSchema = createSelectSchema(users);
+export const emailVerificationTokens = pgTable('email_verification_token', {
+	id: uuid('id').primaryKey().defaultRandom(),
+	userId: uuid('user_id')
+		.notNull()
+		.references(() => users.id),
+	expires: bigint('expires', { mode: 'number' })
+});
 
-export const sessions = pgTable("auth_session", {
-    id: varchar("id", {
+export const passwordResetTokens = pgTable('password_reset_token', {
+	id: uuid('id').primaryKey().defaultRandom(),
+	userId: uuid('user_id')
+		.notNull()
+		.references(() => users.id),
+	expires: bigint('expires', { mode: 'number' })
+});
+
+export const sessions = pgTable('auth_session', {
+	id: varchar('id', {
 		length: 128
 	}).primaryKey(),
-	userId: uuid("user_id").notNull().references(() => users.id),
-	activeExpires: bigint("active_expires", {
-		mode: "number"
+	userId: uuid('user_id')
+		.notNull()
+		.references(() => users.id),
+	activeExpires: bigint('active_expires', {
+		mode: 'number'
 	}).notNull(),
-	idleExpires: bigint("idle_expires", {
-		mode: "number"
+	idleExpires: bigint('idle_expires', {
+		mode: 'number'
 	}).notNull()
 });
 
-export const keys = pgTable("auth_key", {
-	id: varchar("id", {
+export const keys = pgTable('auth_key', {
+	id: varchar('id', {
 		length: 255
 	}).primaryKey(),
-	userId: uuid("user_id").notNull().references(() => users.id),
-	primaryKey: boolean("primary_key").notNull(),
-	hashedPassword: varchar("hashed_password", {
+	userId: uuid('user_id')
+		.notNull()
+		.references(() => users.id),
+	hashedPassword: varchar('hashed_password', {
 		length: 255
 	}),
-	expires: bigint("expires", {
-		mode: "number"
+	expires: bigint('expires', {
+		mode: 'number'
 	})
 });

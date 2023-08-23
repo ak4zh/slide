@@ -1,9 +1,52 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "04bdbc6c-89eb-43f7-b13f-6271595e20df",
+  "id": "95f7d7d3-a7f7-43f0-bfa0-c73ad35d2c2c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "email_verification_token": {
+      "name": "email_verification_token",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "email_verification_token_user_id_auth_user_id_fk": {
+          "name": "email_verification_token_user_id_auth_user_id_fk",
+          "tableFrom": "email_verification_token",
+          "tableTo": "auth_user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "auth_key": {
       "name": "auth_key",
       "schema": "",
@@ -17,12 +60,6 @@
         "user_id": {
           "name": "user_id",
           "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "primary_key": {
-          "name": "primary_key",
-          "type": "boolean",
           "primaryKey": false,
           "notNull": true
         },
@@ -55,7 +92,51 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {}
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "password_reset_token": {
+      "name": "password_reset_token",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "password_reset_token_user_id_auth_user_id_fk": {
+          "name": "password_reset_token_user_id_auth_user_id_fk",
+          "tableFrom": "password_reset_token",
+          "tableTo": "auth_user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
     },
     "auth_session": {
       "name": "auth_session",
@@ -102,7 +183,8 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {}
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
     },
     "auth_user": {
       "name": "auth_user",
@@ -112,13 +194,22 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
-        "email": {
-          "name": "email",
+        "role": {
+          "name": "role",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'user'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         },
         "first_name": {
           "name": "first_name",
@@ -132,66 +223,39 @@
           "primaryKey": false,
           "notNull": false
         },
-        "role": {
-          "name": "role",
+        "domain": {
+          "name": "domain",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'user'"
+          "notNull": true
         },
-        "verified": {
-          "name": "verified",
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email_verified": {
+          "name": "email_verified",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
           "default": false
-        },
-        "receive_email": {
-          "name": "receive_email",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": true
-        },
-        "token": {
-          "name": "token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
         }
       },
       "indexes": {
-        "name_idx": {
-          "name": "name_idx",
+        "email_domain_idx": {
+          "name": "email_domain_idx",
           "columns": [
-            "email"
+            "email",
+            "domain"
           ],
-          "isUnique": false
-        },
-        "token_idx": {
-          "name": "token_idx",
-          "columns": [
-            "token"
-          ],
-          "isUnique": false
+          "isUnique": true
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {}
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
     }
   },
   "enums": {},

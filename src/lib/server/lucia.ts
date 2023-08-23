@@ -1,27 +1,27 @@
 // lib/server/lucia.ts
-import lucia from 'lucia-auth';
-import { sveltekit } from 'lucia-auth/middleware';
+import { lucia } from 'lucia';
+import { sveltekit } from 'lucia/middleware';
 import { dev } from '$app/environment';
-import { pg } from "@lucia-auth/adapter-postgresql";
+import { pg } from '@lucia-auth/adapter-postgresql';
 import { connectionPool } from './db/client';
 
 export const auth = lucia({
-	adapter: pg(connectionPool),
+	adapter: pg(connectionPool, {
+		user: 'auth_user',
+		key: 'auth_key',
+		session: 'auth_session'
+	}),
 	env: dev ? 'DEV' : 'PROD',
 	middleware: sveltekit(),
-	transformDatabaseUser: (userData) => {
+	getUserAttributes: (data) => {
 		return {
-			userId: userData.id,
-			email: userData.email,
-			firstName: userData.first_name,
-			lastName: userData.last_name,
-			role: userData.role,
-			verified: userData.verified,
-			receiveEmail: userData.receive_email,
-			token: userData.token
+			role: data.role,
+			firstName: data.first_name,
+			lastName: data.last_name,
+			email: data.email,
+			emailVerified: data.email_verified
 		};
-	},
-	generateCustomUserId: () => crypto.randomUUID()
+	}
 });
 
 export type Auth = typeof auth;

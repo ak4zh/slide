@@ -22,14 +22,14 @@ declare global {
 declare global {
 	namespace Lucia {
 		type Auth = import('$lib/lucia').Auth;
-		type UserAttributes = {
-			email: string;
+		type DatabaseSessionAttributes = {};
+		type DatabaseUserAttributes = {
+			role: string;
 			first_name: string;
 			last_name: string;
-			role: string;
-			verified: boolean;
-			receive_email: boolean;
-			token: string;
+			domain: string;
+			email: string;
+			email_verified: boolean;
 		};
 	}
 }
