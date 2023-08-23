@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import type { NavItems } from '$lib/config/constants';
     import { i } from '@inlang/sdk-js';

@@ -1,5 +1,6 @@
 # SLIDE: SvelteKit + Lucia + i18n using inlang + Drizzle + TailwindCSS using Skeleton
 
+- Multi Tenant configured
 - [Lucia](https://lucia-auth.com/) for authentication
 - [inlang](https://inlang.com) for language translation
 - [Drizzle ORM](https://orm.drizzle.team/) for database connectivity and type safety
