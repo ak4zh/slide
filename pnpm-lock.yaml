@@ -24,8 +24,8 @@ dependencies:
     specifier: ^0.233.0
     version: 0.233.0(svelte@3.59.1)
   nodemailer:
-    specifier: ^6.9.3
-    version: 6.9.3
+    specifier: ^6.9.4
+    version: 6.9.4
   pg:
     specifier: ^8.11.0
     version: 8.11.0
@@ -53,8 +53,8 @@ devDependencies:
     specifier: ^0.5.9
     version: 0.5.9(tailwindcss@3.3.2)
   '@types/nodemailer':
-    specifier: ^6.4.8
-    version: 6.4.8
+    specifier: ^6.4.9
+    version: 6.4.9
   '@types/pg':
     specifier: ^8.10.1
     version: 8.10.1
@@ -899,8 +899,8 @@ packages:
   /@types/node@20.2.5:
     resolution: {integrity: sha512-JJulVEQXmiY9Px5axXHeYGLSjhkZEnD+MDPDGbCbIAbMslkKwmygtZFy1X6s/075Yo94sf8GuSlFfPzysQrWZQ==}
 
-  /@types/nodemailer@6.4.8:
-    resolution: {integrity: sha512-oVsJSCkqViCn8/pEu2hfjwVO+Gb3e+eTWjg3PcjeFKRItfKpKwHphQqbYmPQrlMk+op7pNNWPbsJIEthpFN/OQ==}
+  /@types/nodemailer@6.4.9:
+    resolution: {integrity: sha512-XYG8Gv+sHjaOtUpiuytahMy2mM3rectgroNbs6R3djZEKmPNiIJwe9KqOJBGzKKnNZNKvnuvmugBgpq3w/S0ig==}
     dependencies:
       '@types/node': 20.2.5
     dev: true
@@ -2469,8 +2469,8 @@ packages:
     resolution: {integrity: sha512-QzsYKWhXTWx8h1kIvqfnC++o0pEmpRQA/aenALsL2F4pqNVr7YzcdMlDij5WBnwftRbJCNJL/O7zdKaxKPHqgQ==}
     dev: true
 
-  /nodemailer@6.9.3:
-    resolution: {integrity: sha512-fy9v3NgTzBngrMFkDsKEj0r02U7jm6XfC3b52eoNV+GCrGj+s8pt5OqhiJdWKuw51zCTdiNR/IUD1z33LIIGpg==}
+  /nodemailer@6.9.4:
+    resolution: {integrity: sha512-CXjQvrQZV4+6X5wP6ZIgdehJamI63MFoYFGGPtHudWym9qaEHDNdPzaj5bfMCvxG1vhAileSWW90q7nL0N36mA==}
     engines: {node: '>=6.0.0'}
     dev: false
 
