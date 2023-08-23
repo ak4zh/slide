@@ -3,20 +3,8 @@
 	import { page } from '$app/stores';
 	import type { NavItems } from '$lib/config/constants';
     import { i } from '@inlang/sdk-js';
-    import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton"
 	import SignoutForm from './SignoutForm.svelte';
-
     export let navItems: NavItems;
-    let formEl: HTMLFormElement;
-
-    const signoutConfirmModal = (button: HTMLButtonElement, form: HTMLFormElement): ModalSettings => {
-        return {
-            type: 'confirm',
-            title: 'Please Confirm',
-            body: 'Are you sure you want to sign out?',
-            response: (r: boolean) => { if (r) form.requestSubmit(button) }
-        }
-    }
 </script>
 
 <div class="card h-16 md:hidden">
