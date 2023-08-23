@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { LightSwitch } from '@skeletonlabs/skeleton';
-	import { enhance } from '$app/forms';
-	import { drawerStore } from '@skeletonlabs/skeleton';
-	import { i, languages, language, switchLanguage } from '@inlang/sdk-js';
-
-	function drawerClose(): void { drawerStore.close() };
-	
+	import { getDrawerStore } from '@skeletonlabs/skeleton';
+	import { i, languages, language, switchLanguage } from '@inlang/sdk-js';	
 	import { page } from '$app/stores';
 	import type { NavItems } from '$lib/config/constants';
 	import SignoutForm from './SignoutForm.svelte';
+
     export let navItems: NavItems;
+
 	let selectedLanguage: string = language || 'en';
+	let drawerStore = getDrawerStore();
+	function drawerClose(): void { drawerStore.close() };
 </script>
 
 <nav class="list-nav p-4">

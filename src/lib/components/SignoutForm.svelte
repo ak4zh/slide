@@ -2,8 +2,9 @@
 	import { enhance } from "$app/forms";
 	import { i } from '@inlang/sdk-js';
 	import { LogOut } from "lucide-svelte";
-    import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton"
+    import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton"
 
+    let modalStore = getModalStore();
     let formEl: HTMLFormElement;
 
     const signoutConfirmModal = (button: HTMLButtonElement, form: HTMLFormElement): ModalSettings => {
