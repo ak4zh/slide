@@ -48,7 +48,7 @@
 	"type": "module",
 	"dependencies": {
 		"@lucia-auth/adapter-postgresql": "^2.0.0",
-		"drizzle-orm": "^0.28.3",
+		"drizzle-orm": "^0.28.5",
 		"drizzle-zod": "^0.5.1",
 		"lucia": "^2.4.0",
 		"lucide-svelte": "^0.268.0",
