@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@lucia-auth/adapter-postgresql':
-    specifier: ^2.0.0
-    version: 2.0.0(lucia@2.4.0)(pg@8.11.3)
+    specifier: ^2.0.1
+    version: 2.0.1(lucia@2.4.0)(pg@8.11.3)
   drizzle-orm:
     specifier: ^0.28.5
     version: 0.28.5(@types/pg@8.10.2)(pg@8.11.3)
@@ -881,8 +881,8 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  /@lucia-auth/adapter-postgresql@2.0.0(lucia@2.4.0)(pg@8.11.3):
-    resolution: {integrity: sha512-1HUOjJPbCxvhFcHjjr6LypflBtGCS5fsXsK++SsyKn3bVj6Z6XwgxMhvLTJlvwXEQxGL1c9HJE81mIZHaHT4+w==}
+  /@lucia-auth/adapter-postgresql@2.0.1(lucia@2.4.0)(pg@8.11.3):
+    resolution: {integrity: sha512-HrgyCsHXEWMD3oF2vSzbqucwGR9zCNvsV5MTV/J3EkiTHskjJXRoVqIoOONeLsdBTy+nIciyoWNMAYe9LJj3tA==}
     peerDependencies:
       lucia: ^2.0.0
       pg: ^8.8.0
