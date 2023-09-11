@@ -18,8 +18,8 @@ dependencies:
     specifier: ^2.4.0
     version: 2.4.0
   lucide-svelte:
-    specifier: ^0.269.0
-    version: 0.269.0(svelte@4.2.0)
+    specifier: ^0.276.0
+    version: 0.276.0(svelte@4.2.0)
   nodemailer:
     specifier: ^6.9.4
     version: 6.9.4
@@ -2317,8 +2317,8 @@ packages:
     resolution: {integrity: sha512-v2pyFQVF734+EU3m9GeeJQorFR7zLt7JoOJ1UD5ttR5Z+w4IkOyExiXyFe+zssKpony66u94wcxyws3lZSpzzg==}
     dev: false
 
-  /lucide-svelte@0.269.0(svelte@4.2.0):
-    resolution: {integrity: sha512-yMYxtGB5oOf0+j+FnlyZpBnOzh6uInzDMIZB+rzAx4hjx4atB7nAZBj4lWrRoXFn4aduP1Ff84D4hLV5Va+k0Q==}
+  /lucide-svelte@0.276.0(svelte@4.2.0):
+    resolution: {integrity: sha512-SKj37PCOHe8gHxogidf1+TJKeezgir/yjrC6GWs2VyiCQKjnURBB6VZ/w1qFDItTTfnX0uJHEP/VxCDdT7lDJw==}
     peerDependencies:
       svelte: '>=3 <5'
     dependencies:
