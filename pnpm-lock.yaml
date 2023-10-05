@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@lucia-auth/adapter-postgresql':
     specifier: ^2.0.1
-    version: 2.0.1(lucia@2.4.0)(pg@8.11.3)
+    version: 2.0.1(lucia@2.7.1)(pg@8.11.3)
   drizzle-orm:
     specifier: ^0.28.5
     version: 0.28.5(@types/pg@8.10.2)(pg@8.11.3)
@@ -15,8 +15,8 @@ dependencies:
     specifier: ^0.5.1
     version: 0.5.1(drizzle-orm@0.28.5)(zod@3.22.2)
   lucia:
-    specifier: ^2.4.0
-    version: 2.4.0
+    specifier: ^2.7.1
+    version: 2.7.1
   lucide-svelte:
     specifier: ^0.279.0
     version: 0.279.0(svelte@4.2.0)
@@ -881,7 +881,7 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  /@lucia-auth/adapter-postgresql@2.0.1(lucia@2.4.0)(pg@8.11.3):
+  /@lucia-auth/adapter-postgresql@2.0.1(lucia@2.7.1)(pg@8.11.3):
     resolution: {integrity: sha512-HrgyCsHXEWMD3oF2vSzbqucwGR9zCNvsV5MTV/J3EkiTHskjJXRoVqIoOONeLsdBTy+nIciyoWNMAYe9LJj3tA==}
     peerDependencies:
       lucia: ^2.0.0
@@ -893,7 +893,7 @@ packages:
       postgres:
         optional: true
     dependencies:
-      lucia: 2.4.0
+      lucia: 2.7.1
       pg: 8.11.3
     dev: false
 
@@ -2355,8 +2355,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucia@2.4.0:
-    resolution: {integrity: sha512-v2pyFQVF734+EU3m9GeeJQorFR7zLt7JoOJ1UD5ttR5Z+w4IkOyExiXyFe+zssKpony66u94wcxyws3lZSpzzg==}
+  /lucia@2.7.1:
+    resolution: {integrity: sha512-EHDTajS1YWA7Q37jd29Far1l4nfZgsWLp4hDQeaQhVpJd2WKQqA3626kJYmOj1CTweVMkE54xFi5JIph+agZkQ==}
     dev: false
 
   /lucide-svelte@0.279.0(svelte@4.2.0):
