@@ -6,7 +6,7 @@ import { setError, superValidate } from 'sveltekit-superforms/server';
 
 export const load = async (event) => {
 	const validToken = await isValidPasswordResetToken(event.params.token);
-	if (!validToken) throw redirect(302, '/password-reset');
+	if (!validToken) redirect(302, '/password-reset');
 	const form = await superValidate(event, userUpdatePasswordSchema);
 	return { form };
 };
@@ -47,6 +47,6 @@ export const actions = {
 				'The was a problem resetting your password. Please contact support if you need further help.'
 			);
 		}
-		throw redirect(302, `/auth/password-reset/update-${token}/success`);
+		redirect(302, `/auth/password-reset/update-${token}/success`);
 	}
 };

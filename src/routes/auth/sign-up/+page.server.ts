@@ -15,7 +15,7 @@ const signUpSchema = userSchema.pick({
 });
 
 export const load = async (event) => {
-	if (event.locals.user) throw redirect(302, '/dashboard');
+	if (event.locals.user) redirect(302, '/dashboard');
 	const form = await superValidate(event, signUpSchema);
 	return {
 		form

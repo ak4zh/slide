@@ -12,10 +12,10 @@ export const load = async ({ locals }) => {
 	const form = await superValidate(schema);
 
 	if (!session) {
-		throw redirect(302, '/login');
+		redirect(302, '/login');
 	}
 	if (session.user.emailVerified) {
-		throw redirect(302, '/');
+		redirect(302, '/');
 	}
 	return { form };
 };
@@ -25,10 +25,10 @@ export const actions = {
 		const form = await superValidate(event.request, schema);
 		const user = event.locals.user;
 		if (!user) {
-			throw redirect(302, '/auth/login');
+			redirect(302, '/auth/login');
 		}
 		if (user.emailVerified) {
-			throw redirect(302, '/');
+			redirect(302, '/');
 		}
 		const token = await generateEmailVerificationToken(user.userId);
 		await sendVerificationEmail(getBaseURL(event.url), user.email, token);

@@ -21,5 +21,5 @@ export const GET = async ({ params, locals }) => {
 		console.log(err)
 	}
 
-	throw redirect(302, '/');
+	redirect(302, '/');
 };
