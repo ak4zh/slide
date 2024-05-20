@@ -1,3 +1,8 @@
+# Newer Template Available
+Created a newer template featuring Svelte 5 and shadcn-svelte, along with all dependencies updated to their latest versions.
+
+- [Sveltekit Template 2024](https://github.com/ak4zh/sveltekit-template)
+
 # SLIDE: SvelteKit + Lucia + i18n using inlang + Drizzle + TailwindCSS using Skeleton
 
 - Multi Tenant configured
